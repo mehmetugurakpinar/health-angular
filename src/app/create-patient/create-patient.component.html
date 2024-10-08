@@ -1,0 +1,20 @@
+<h2>Create Patient</h2>
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="patient.name" name="name" required />
+  </div>
+  <div>
+    <label>Surname:</label>
+    <input type="text" [(ngModel)]="patient.surname" name="surname" required />
+  </div>
+  <div>
+    <label>Birthdate:</label>
+    <input type="date" [(ngModel)]="patient.birthDate" name="birthDate" required />
+  </div>
+  <div>
+    <label>Phone No:</label>
+    <input type="text" [(ngModel)]="patient.phoneNo" name="phoneNo" />
+  </div>
+  <button type="submit">Save</button>
+</form>

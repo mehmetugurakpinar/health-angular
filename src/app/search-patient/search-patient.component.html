@@ -1,0 +1,40 @@
+<h2>Search Patient</h2>
+<form (ngSubmit)="onSearch()">
+  <div>
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="name" name="name" required />
+  </div>
+  <button type="submit">Search</button>
+</form>
+
+<div *ngIf="patients.length > 0">
+  <h3>Search Results</h3>
+  <ul>
+    <li *ngFor="let patient of patients" (click)="onSelect(patient)">
+      {{ patient.name }} {{ patient.surname }}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="selectedPatient">
+  <h2>Update Patient</h2>
+  <form (ngSubmit)="onUpdate()">
+    <div>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="selectedPatient.name" name="name" required />
+    </div>
+    <div>
+      <label>Surname:</label>
+      <input type="text" [(ngModel)]="selectedPatient.surname" name="surname" required />
+    </div>
+    <div>
+      <label>Birthdate:</label>
+      <input type="date" [(ngModel)]="selectedPatient.birthDate" name="birthDate" required />
+    </div>
+    <div>
+      <label>Phone No:</label>
+      <input type="text" [(ngModel)]="selectedPatient.phoneNo" name="phoneNo" />
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</div>

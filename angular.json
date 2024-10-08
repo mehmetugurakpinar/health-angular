@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "patientManagement"
+  "defaultProject": "patientManagement",
+  "cli": {
+    "analytics": false
+  }
 }
