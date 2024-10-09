@@ -1,20 +1,75 @@
-<h2>Create Patient</h2>
-<form (ngSubmit)="onSubmit()">
-  <div>
-    <label>Name:</label>
-    <input type="text" [(ngModel)]="patient.name" name="name" required />
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-5 shadow-lg" style="width: 400px;">
+    <h2 class="text-center mb-4">Create Patient</h2>
+
+    <form (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="patient.given"
+          name="name"
+          class="form-control"
+          placeholder="Enter patient name"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="surname" class="form-label">Surname</label>
+        <input
+          id="surname"
+          type="text"
+          [(ngModel)]="patient.family"
+          name="surname"
+          class="form-control"
+          placeholder="Enter patient surname"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="birthDate" class="form-label">Birth Date</label>
+        <input
+          id="birthDate"
+          type="date"
+          [(ngModel)]="patient.birthDate"
+          name="birthDate"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="phoneNo" class="form-label">Phone Number</label>
+        <input
+          id="phoneNo"
+          type="text"
+          [(ngModel)]="patient.phoneNo"
+          name="phoneNo"
+          class="form-control"
+          placeholder="Enter phone number"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="gender" class="form-label">Gender</label>
+        <select
+          id="gender"
+          [(ngModel)]="patient.gender"
+          name="gender"
+          class="form-select"
+          required
+        >
+          <option value="" disabled selected>Select gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-primary w-100">Save Patient</button>
+    </form>
   </div>
-  <div>
-    <label>Surname:</label>
-    <input type="text" [(ngModel)]="patient.surname" name="surname" required />
-  </div>
-  <div>
-    <label>Birthdate:</label>
-    <input type="date" [(ngModel)]="patient.birthDate" name="birthDate" required />
-  </div>
-  <div>
-    <label>Phone No:</label>
-    <input type="text" [(ngModel)]="patient.phoneNo" name="phoneNo" />
-  </div>
-  <button type="submit">Save</button>
-</form>
+</div>

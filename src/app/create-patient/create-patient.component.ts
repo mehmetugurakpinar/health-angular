@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PatientService } from '../patient.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-patient',
@@ -8,22 +9,24 @@ import { PatientService } from '../patient.service';
 })
 export class CreatePatientComponent {
   patient = {
-    name: '',
-    surname: '',
+    given: '',
+    family: '',
     birthDate: '',
-    phoneNo: ''
+    phoneNo: '',
+    gender: ''
   };
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService,
+    private router: Router) {}
 
   onSubmit(): void {
-    this.patientService.createPatient(this.patient).subscribe(
-      response => {
-        console.log('Patient saved successfully', response);
-        alert('Patient saved successfully');
+    this.patientService.upsertPatient(this.patient).subscribe(
+      (response: any) => {
+        const createdPatientId = response.id;
+        this.router.navigate(['/update', createdPatientId], { state: { fromCreate: true } });
       },
       error => {
-        console.error('Error saving patient', error);
+        console.error('Error creating patient', error.error);
       }
     );
   }

@@ -12,16 +12,12 @@ export class PatientService {
 
   constructor(private http: HttpClient) {}
 
-  createPatient(patient: any): Observable<any> {
-    return this.http.post(`${this.baseUrlUpsert}/create`, patient);
+  upsertPatient(patient: any): Observable<any> {
+    return this.http.post(`${this.baseUrlUpsert}`, patient);
   }
 
   searchPatientByName(name: string): Observable<any> {
-    return this.http.get(`${this.baseUrlGet}/search`, { params: { q: name } });
-  }
-
-  updatePatient(patient: any): Observable<any> {
-    return this.http.put(`${this.baseUrlUpsert}/update`, patient);
+    return this.http.get(`${this.baseUrlGet}`, { params: { q: name } });
   }
 
   getPatientById(id: string): Observable<any> {

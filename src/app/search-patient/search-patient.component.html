@@ -1,40 +1,42 @@
-<h2>Search Patient</h2>
-<form (ngSubmit)="onSearch()">
-  <div>
-    <label>Name:</label>
-    <input type="text" [(ngModel)]="name" name="name" required />
-  </div>
-  <button type="submit">Search</button>
-</form>
-
-<div *ngIf="patients.length > 0">
-  <h3>Search Results</h3>
-  <ul>
-    <li *ngFor="let patient of patients" (click)="onSelect(patient)">
-      {{ patient.name }} {{ patient.surname }}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="selectedPatient">
-  <h2>Update Patient</h2>
-  <form (ngSubmit)="onUpdate()">
-    <div>
-      <label>Name:</label>
-      <input type="text" [(ngModel)]="selectedPatient.name" name="name" required />
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Search Patient</h2>
+  <form (ngSubmit)="onSearch()" class="mb-5">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        [(ngModel)]="name"
+        name="name"
+        class="form-control"
+        placeholder="Enter patient name"
+        required
+      />
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
-    <div>
-      <label>Surname:</label>
-      <input type="text" [(ngModel)]="selectedPatient.surname" name="surname" required />
-    </div>
-    <div>
-      <label>Birthdate:</label>
-      <input type="date" [(ngModel)]="selectedPatient.birthDate" name="birthDate" required />
-    </div>
-    <div>
-      <label>Phone No:</label>
-      <input type="text" [(ngModel)]="selectedPatient.phoneNo" name="phoneNo" />
-    </div>
-    <button type="submit">Update</button>
   </form>
+
+  <div *ngIf="patients.length > 0">
+    <h3>Search Results</h3>
+    <table class="table table-bordered table-hover mt-4">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Birth Date</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patients">
+          <td>{{ patient.given }}</td>
+          <td>{{ patient.family }}</td>
+          <td>{{ patient.birthDate }}</td>
+          <td>{{ patient.phoneNo }}</td>
+          <td>
+            <button class="btn btn-info" (click)="onSelect(patient)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

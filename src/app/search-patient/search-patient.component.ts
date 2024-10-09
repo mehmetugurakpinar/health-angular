@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PatientService } from '../patient.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-patient',
@@ -11,31 +12,31 @@ export class SearchPatientComponent {
   patients: any[] = [];
   selectedPatient: any = null;
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService, private router: Router) {}
 
   onSearch(): void {
     this.patientService.searchPatientByName(this.name).subscribe(
       response => {
-        this.patients = response.hits.hits.map((hit: any) => hit._source);
+        this.patients = response;
       },
       error => {
-        console.error('Error searching for patients', error);
+        alert(error.error);
       }
     );
   }
 
   onSelect(patient: any): void {
-    this.selectedPatient = { ...patient };
+    this.router.navigate(['/update', patient.id], { state: { patient } });
   }
 
   onUpdate(): void {
-    this.patientService.updatePatient(this.selectedPatient).subscribe(
+    this.patientService.upsertPatient(this.selectedPatient).subscribe(
       response => {
         console.log('Patient updated successfully', response);
         alert('Patient updated successfully');
       },
       error => {
-        console.error('Error updating patient', error);
+        alert(error.error);
       }
     );
   }
