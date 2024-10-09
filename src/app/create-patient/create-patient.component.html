@@ -2,33 +2,45 @@
   <div class="card p-5 shadow-lg" style="width: 400px;">
     <h2 class="text-center mb-4">Create Patient</h2>
 
-    <form (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+    <form #patientForm="ngForm" (ngSubmit)="onSubmit(patientForm)" class="needs-validation" novalidate>
+      
+      <!-- Name Field -->
       <div class="form-group mb-3">
         <label for="name" class="form-label">Name</label>
         <input
           id="name"
           type="text"
           [(ngModel)]="patient.given"
-          name="name"
+          name="given"
           class="form-control"
           placeholder="Enter patient name"
           required
+          #given="ngModel"
         />
+        <div *ngIf="given.invalid && given.touched" class="text-danger">
+          Name is required.
+        </div>
       </div>
 
+      <!-- Surname Field -->
       <div class="form-group mb-3">
         <label for="surname" class="form-label">Surname</label>
         <input
           id="surname"
           type="text"
           [(ngModel)]="patient.family"
-          name="surname"
+          name="family"
           class="form-control"
           placeholder="Enter patient surname"
           required
+          #family="ngModel"
         />
+        <div *ngIf="family.invalid && family.touched" class="text-danger">
+          Surname is required.
+        </div>
       </div>
 
+      <!-- Birth Date Field -->
       <div class="form-group mb-3">
         <label for="birthDate" class="form-label">Birth Date</label>
         <input
@@ -38,9 +50,14 @@
           name="birthDate"
           class="form-control"
           required
+          #birthDate="ngModel"
         />
+        <div *ngIf="birthDate.invalid && birthDate.touched" class="text-danger">
+          Birth Date is required.
+        </div>
       </div>
 
+      <!-- Phone Number Field -->
       <div class="form-group mb-3">
         <label for="phoneNo" class="form-label">Phone Number</label>
         <input
@@ -53,6 +70,7 @@
         />
       </div>
 
+      <!-- Gender Field -->
       <div class="form-group mb-3">
         <label for="gender" class="form-label">Gender</label>
         <select
@@ -61,15 +79,21 @@
           name="gender"
           class="form-select"
           required
+          #gender="ngModel"
         >
           <option value="" disabled selected>Select gender</option>
           <option value="MALE">Male</option>
           <option value="FEMALE">Female</option>
           <option value="OTHER">Other</option>
         </select>
+        <div *ngIf="gender.invalid && gender.touched" class="text-danger">
+          Gender is required.
+        </div>
       </div>
-      
-      <button type="submit" class="btn btn-primary w-100">Save Patient</button>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="patientForm.invalid">Save Patient</button>
+
     </form>
   </div>
 </div>

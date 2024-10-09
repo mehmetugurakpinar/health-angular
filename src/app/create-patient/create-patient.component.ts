@@ -19,15 +19,21 @@ export class CreatePatientComponent {
   constructor(private patientService: PatientService,
     private router: Router) {}
 
-  onSubmit(): void {
-    this.patientService.upsertPatient(this.patient).subscribe(
-      (response: any) => {
-        const createdPatientId = response.id;
-        this.router.navigate(['/update', createdPatientId], { state: { fromCreate: true } });
-      },
-      error => {
-        console.error('Error creating patient', error.error);
-      }
-    );
+  onSubmit(patientForm: any): void {
+    if (patientForm.valid) {
+      this.patientService.upsertPatient(this.patient).subscribe(
+        (response: any) => {
+          const createdPatientId = response.id;
+          this.router.navigate(['/update', createdPatientId], { state: { fromCreate: true } });
+        },
+        error => {
+          console.error('Error creating patient', error.error);
+        }
+      );
+      console.log('Form Submitted!', this.patient);
+    } else {
+      alert('Form is invalid');
+    }
+    
   }
 }
